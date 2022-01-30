@@ -1,0 +1,35 @@
+-- returns missing data 
+SELECT
+	*
+FROM
+	DEPARTMENTS
+	LEFT JOIN EMPLOYEES
+	ON DEPARTMENTS.ID = EMPLOYEES.DEPT_ID
+WHERE MGR_ID IS NOT NULL;
+	
+-- returns complete data
+SELECT
+	*
+FROM
+	DEPARTMENTS
+	LEFT JOIN EMPLOYEES
+	ON DEPARTMENTS.ID = EMPLOYEES.DEPT_ID
+	AND MGR_ID IS NOT NULL;
+
+-- Oracle style implicit outer join with missing data
+SELECT
+	*
+FROM
+	DEPARTMENTS, 
+	EMPLOYEES
+WHERE DEPARTMENTS.ID = EMPLOYEES.DEPT_ID (+)
+    AND MGR_ID IS NOT NULL;
+    
+-- Oracle style implicit outer join with complete data
+SELECT
+	*
+FROM
+	DEPARTMENTS, 
+	EMPLOYEES
+WHERE DEPARTMENTS.ID = EMPLOYEES.DEPT_ID (+)
+    AND MGR_ID (+) IS NOT NULL;	
